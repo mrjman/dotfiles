@@ -61,11 +61,20 @@
 
 # git mergetool
 [merge]
-	tool = opendiff
+	tool = kdiff3
 	renameLimit = 0
+[mergetool "kdiff3"]
+	path = /Applications/kdiff3.app/Contents/MacOS/kdiff3
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path =
+[mergetool "sourcetree"]
+	cmd = /Applications/kdiff3.app/Contents/MacOS/kdiff3 \"$BASE\" \"$LOCAL\" \"$REMOTE\" -o \"$MERGED\"
+	trustExitCode = true
+[rerere]
+	enabled = 1
 
 
-	
 [url "git://gist.github.com/"]
 	insteadOf = "gist:"
 
@@ -77,7 +86,8 @@
 [push]
 	default = current
 	followTags = true
-
+[heroku]
+	account = mrjman
 # use separate file for username / github token / etc
 [include]
   path = ~/.gitconfig.local
@@ -88,6 +98,7 @@
 [filter "lfs"]
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
+	process = git-lfs filter-process
 	required = true
 
 [fetch]
@@ -102,4 +113,3 @@
 	showPatch = true
 [log]
 	date = relative
-
