@@ -58,13 +58,17 @@
 [merge]
 	tool = kdiff3
 	renameLimit = 0
+[mergetool]
+  prompt = false
+  keepBackup = false
+  keepTemporaries = false
 [mergetool "kdiff3"]
 	path = /Applications/kdiff3.app/Contents/MacOS/kdiff3
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path =
+	path = 
 [mergetool "sourcetree"]
-	cmd = /Applications/kdiff3.app/Contents/MacOS/kdiff3 \"$BASE\" \"$LOCAL\" \"$REMOTE\" -o \"$MERGED\"
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [rerere]
 	enabled = 1
@@ -106,3 +110,8 @@
 	showPatch = true
 [log]
 	date = relative
+[user]
+	name = Jesse Manning
+	email = jesse@mondorobot.com
+[commit]
+	template = ~/.stCommitMsg
