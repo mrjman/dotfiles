@@ -179,3 +179,11 @@ function code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCodeInsiders" -
 shellswitch () {
 	chsh -s $(brew --prefix)/bin/$1
 }
+
+heroku_pg_restore() {
+	if [ $# -ne 2 ]; then
+		echo 'Usage: heroku_pg_restore db_name dump_file'
+	else
+		pg_restore --verbose --clean --no-acl --no-owner -h localhost -U $USER -d $1 $2
+	fi
+}
