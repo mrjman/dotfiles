@@ -11,6 +11,9 @@ brew install homebrew/cask-cask
 # brew tap caskroom/versions
 
 # daily
+brew install alfred
+brew install slack
+brew install slate
 # brew cask install spectacle
 # brew cask install dropbox
 # brew cask install gyazo
@@ -19,6 +22,9 @@ brew install homebrew/cask-cask
 # brew cask install flux
 
 # dev
+brew install atom
+brew install kdiff3
+brew install sourcetree
 # brew cask install iterm2
 # brew cask install sublime-text
 # brew cask install imagealpha
