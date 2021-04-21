@@ -148,7 +148,10 @@ export PATH=$HOME/.homebrew/bin:$HOME/.homebrew/sbin:$PATH
 # install heroku
 ./heroku.sh
 
-# atom add-ons
+# install rvm
+curl -sSL https://get.rvm.io | bash
+
+# install atom add-ons
 apm install mrjman/atom-pane-manager
 apm install sync-settings
 
