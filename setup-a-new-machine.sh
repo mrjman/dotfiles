@@ -145,6 +145,10 @@ export PATH=$HOME/.homebrew/bin:$HOME/.homebrew/sbin:$PATH
 ### install of common things
 ###
 
+# atom add-ons
+apm install mrjman/atom-pane-manager
+apm install sync-settings
+
 # github.com/jamiew/git-friendly
 # the `push` command which copies the github compare URL to my clipboard is heaven
 bash < <( curl https://raw.github.com/jamiew/git-friendly/master/install.sh)
