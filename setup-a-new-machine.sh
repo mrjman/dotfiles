@@ -212,7 +212,7 @@ echo $BASH_VERSION # should be 4.x not the old 3.2.X
 ln -sf "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" ~/bin/subl
 
 # install nvm (Node Version Nanager, https://github.com/nvm-sh/nvm)
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
 
 
 ###
