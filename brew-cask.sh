@@ -7,13 +7,13 @@
 
 # Install native apps
 
-brew install homebrew/cask-cask
 # brew tap caskroom/versions
 
 # daily
-brew install alfred
-brew install slack
-brew install slate
+brew install --cask alfred
+brew install --cask slack
+brew install --cask slate
+brew install --cask zoom
 # brew cask install spectacle
 # brew cask install dropbox
 # brew cask install gyazo
@@ -22,13 +22,14 @@ brew install slate
 # brew cask install flux
 
 # dev
-brew install atom
-brew install kdiff3
-brew install sourcetree
+brew install --cask atom
+brew install --cask imagealpha
+brew install --cask imageoptim
+brew install --cask kdiff3
+brew install --cask pgadmin4
+brew install --cask sourcetree
 # brew cask install iterm2
 # brew cask install sublime-text
-# brew cask install imagealpha
-# brew cask install imageoptim
 
 # fun
 # brew cask install limechat
