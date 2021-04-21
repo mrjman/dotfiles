@@ -145,6 +145,9 @@ export PATH=$HOME/.homebrew/bin:$HOME/.homebrew/sbin:$PATH
 ### install of common things
 ###
 
+# install heroku
+./heroku.sh
+
 # atom add-ons
 apm install mrjman/atom-pane-manager
 apm install sync-settings
