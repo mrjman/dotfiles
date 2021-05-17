@@ -14,6 +14,7 @@ brew install --cask alfred
 brew install --cask slack
 brew install --cask slate
 brew install --cask zoom
+brew install --cask gray
 # brew cask install spectacle
 # brew cask install dropbox
 # brew cask install gyazo
@@ -28,6 +29,7 @@ brew install --cask imageoptim
 brew install --cask kdiff3
 brew install --cask pgadmin4
 brew install --cask sourcetree
+brew install --cask postman
 # brew cask install iterm2
 # brew cask install sublime-text
 
