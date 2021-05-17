@@ -60,6 +60,9 @@
 	changed = green
 	untracked = cyan
 
+[checkout]
+	defaultRemote = origin
+
 # git mergetool
 [merge]
 	tool = kdiff3
