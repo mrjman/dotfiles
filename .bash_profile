@@ -38,7 +38,9 @@ export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
 
 # Enable history expansion with space
 # E.g. typing !!<space> will replace the !! with your last command
-bind Space:magic-space
+# if [ -t 1 ]; then
+#     bind Space:magic-space
+# fi
 
 # Use standard ISO 8601 timestamp
 # %F equivalent to %Y-%m-%d
@@ -141,3 +143,8 @@ shopt -s dirspell 2> /dev/null
 
 # Turn on recursive globbing (enables ** to recurse all directories)
 shopt -s globstar 2> /dev/null
+
+complete -C /usr/local/bin/terraform terraform
+
+# Added by OrbStack: command-line tools and integration
+source ~/.orbstack/shell/init.bash 2>/dev/null || :

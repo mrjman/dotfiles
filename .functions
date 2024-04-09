@@ -170,10 +170,6 @@ function nullify() {
   "$@" >/dev/null 2>&1
 }
 
-
-# visual studio code. a la `subl`
-function code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCodeInsiders" --args $*; }
-
 # `shellswitch [bash |zsh]`
 #   Must be in /etc/shells
 shellswitch () {
@@ -184,6 +180,6 @@ heroku_pg_restore() {
 	if [ $# -ne 2 ]; then
 		echo 'Usage: heroku_pg_restore db_name dump_file'
 	else
-		pg_restore --verbose --clean --no-acl --no-owner -h localhost -U $USER -d $1 $2
+		pg_restore --verbose --clean --no-acl --no-owner -j 8 -h localhost -U $USER -d $1 $2
 	fi
 }

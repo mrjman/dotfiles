@@ -61,7 +61,6 @@ alias gs='git status'
 alias ga='git add'
 alias gc='git commit'
 alias gp='git remote prune origin'
-alias gpl='cleanup_branches'
 
 # Networking. IP address, dig, DNS
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
@@ -103,6 +102,19 @@ alias brake='bundle exec rake'
 # postgresql aliases
 # Usage: pg {start|stop|restart|reload|status}
 alias pg='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log'
+
+# terraform aliases
+alias tf='terraform'
+alias tfp='terraform plan'
+alias tfa='terraform apply'
+alias tfc='terraform console'
+alias tfd='terraform destroy'
+alias tff='terraform fmt -recursive'
+alias tfg='terraform graph'
+alias tfim='terraform import'
+alias tfi='terraform init'
+alias tfv='terraform validate'
+alias tfw='terraform workspace'
 
 # slack aliases
 alias slack='nohup /Applications/Slack.app/Contents/MacOS/Slack &'
