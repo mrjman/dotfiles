@@ -1,3 +1,126 @@
+# Add postgres 9.6 to beginning of path
 PATH="/usr/local/opt/postgresql@9.6/bin:$PATH"
 
+# Add postgres 13 to beginning of path
+export PATH="/usr/local/opt/postgresql@13/bin:$PATH"
+
+# Add openssl to beginning of path
+PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
+
+# React native android setup
+export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
+export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
+
 export PATH
+
+# functions
+fastaff_aws_user() {
+  echo ec2-user
+}
+
+fastaff_bastion() {
+  echo "$(fastaff_aws_user)"@54.213.80.203
+}
+
+# fastaff ssh function
+fastaff_ssh() {
+  ssh -i ~/.ssh/fastaff -A "$(fastaff_bastion)"
+}
+
+# fastaff db dump function
+fastaff_pg_dump() {
+  if [[ $# -ne 1  || ($1 != "production" && $1 != "staging") ]]; then
+		echo "Usage: ${FUNCNAME[0]} environment"
+    echo "Environments: production, staging"
+    return
+  fi
+
+  if [ $1 == 'production' ]; then
+    local rds_host=fastaff-prod.cohmcoreas3h.us-west-2.rds.amazonaws.com
+  else
+    local rds_host=fastaff-stage.cohmcoreas3h.us-west-2.rds.amazonaws.com
+  fi
+
+  local date_string=$(date "+%Y%m%d%H%M%S")
+  local filename=fastaff_"$1"_"$date_string".dump
+
+  # create ssh tunnel
+  ssh -o ExitOnForwardFailure=yes -f \
+   -L 5433:"$rds_host":5432 \
+   "$(fastaff_bastion)" \
+   -i ~/.ssh/fastaff \
+   sleep 15
+
+  # run postgres db dump command
+  pg_dump -Fc -h 127.0.0.1 -p 5433 -U awsusername -f "$filename" fastaff
+}
+
+fastaff_pg_restore() {
+  if [ $# -ne 2 ]; then
+		echo "Usage: ${FUNCNAME[0]} db_name dump_file"
+	else
+		pg_restore --verbose --clean --no-acl --no-owner -j 8 -h localhost -U $USER -d $1 $2
+	fi
+}
+
+# Be very careful with this one as it will wipe/restore the remote database
+# fastaff_pg_restore_remote() {
+#   if [ $# -ne 2 ]; then
+# 		echo "Usage: ${FUNCNAME[0]} db_host dump_file"
+#   else
+#     # create ssh tunnel
+#     ssh -o ExitOnForwardFailure=yes -f \
+#     -L 5433:"$1":5432 \
+#     "$(fastaff_bastion)" \
+#     -i ~/.ssh/fastaff \
+#     sleep 15
+
+#     pg_restore --verbose --clean --no-acl --no-owner -j 2 -h 127.0.0.1 -p 5433 -U awsusername -d fastaff $2
+#   fi
+# }
+
+ratecalc_ssh() {
+  ssh -i ~/.ssh/rate-calc-staging.pem -A ec2-user@52.25.232.56
+}
+
+ratecalc_pg_dump() {
+  if [[ $# -ne 1  || ($1 != "production" && $1 != "staging") ]]; then
+		echo "Usage: ${FUNCNAME[0]} environment"
+    echo "Environments: production, staging"
+    return
+  fi
+
+  if [ $1 == 'production' ]; then
+    local rds_host=ratecalculator-prod.cohmcoreas3h.us-west-2.rds.amazonaws.com
+    local db_name=ratecalculator
+    local ssh_host=ec2-user@18.236.154.74
+    local ssh_key=~/.ssh/rate-calc-prod.pem
+  else
+    local rds_host=ratecalculator-staging.cohmcoreas3h.us-west-2.rds.amazonaws.com
+    local db_name=ratecalculatorstaging
+    local ssh_host=ec2-user@52.25.232.56
+    local ssh_key=~/.ssh/rate-calc-staging.pem
+  fi
+
+  local date_string=$(date "+%Y%m%d%H%M%S")
+  local filename=ratecalc_"$1"_"$date_string".dump
+
+  # create ssh tunnel
+  ssh -o ExitOnForwardFailure=yes -f \
+   -L 5433:"$rds_host":5432 \
+   "$ssh_host" \
+   -i "$ssh_key" \
+   sleep 15
+
+  # run postgres db dump command, get db password from password manager
+  pg_dump -Fc -h 127.0.0.1 -p 5433 -U api -f "$filename" "$db_name"
+}
+
+ratecalc_pg_restore() {
+  if [ $# -ne 2 ]; then
+		echo "Usage: ${FUNCNAME[0]} db_name dump_file"
+	else
+		pg_restore --verbose --clean --no-acl --no-owner -j 8 -h localhost -U postgres -d $1 $2
+	fi
+}
