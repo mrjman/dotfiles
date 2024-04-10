@@ -14,6 +14,14 @@ export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
 
 export PATH
 
+heroku_pg_restore() {
+	if [ $# -ne 2 ]; then
+		echo 'Usage: heroku_pg_restore db_name dump_file'
+	else
+		pg_restore --verbose --clean --no-acl --no-owner -j 8 -h localhost -U $USER -d $1 $2
+	fi
+}
+
 # functions
 fastaff_aws_user() {
   echo ec2-user
