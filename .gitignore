@@ -1,3 +1,4 @@
+*-chrome-mac.zip
 # working files
 .vim/viminfo
 .vim/swaps/*
@@ -27,6 +28,13 @@ Thumbs.db
 # Ignore backup files from vim/kdiff3/etc
 *.orig
 *.swp
+
+# fish shell
+fishd.*
+fish/config.fish.backup
+.config/fish/fish_history
+fish/fish_history
+fish/fish_variables
 
 # Ignore ctags file
 .tags
